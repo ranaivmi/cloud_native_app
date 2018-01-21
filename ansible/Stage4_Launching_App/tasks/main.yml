@@ -47,3 +47,19 @@
     shell: docker swarm join --token SWMTKN-1-1xgq59wtxw6zhym8q8g93lwdjlkp3zbzvd10db7ubilhuza53p-7t1gmap3lgml536wpbj9idglj 10.11.53.41:2377
     changed_when: False
 
+- name:
+  hosts: test-manager
+  remote_user: ubuntu # define user account for ssh login
+  serial: 1          # define the action will be done one by one
+  gather_facts: yes
+  tasks:
+  - name:
+    become: true
+    shell: /home/ubuntu/Deploy-CNA/scripts/client.sh 5000
+
+  - name: Pulling the docker images
+    become: true
+    shell: /home/ubuntu/Deploy-CNA/scripts/pull_images
+
+  - name: Launching the application
+    shell: /home/ubuntu/Deploy-CNA/docker_services.sh
