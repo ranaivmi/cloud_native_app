@@ -5,7 +5,7 @@
 #
 # You need to provide your Registry address here:
 #REGISTRY=uggla
-REGISTRY=lab7-2.labossi.hpintelco.org:5500
+REGISTRY=10.11.53.33:5000
 KEYSTONE=labossi.hpintelco.org
 MYSQL_ROOT_PASSWORD=toto
 MYSQL_DATABASE=prestashop

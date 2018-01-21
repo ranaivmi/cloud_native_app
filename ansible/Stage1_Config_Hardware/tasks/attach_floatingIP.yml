@@ -1,0 +1,11 @@
+- name: Attach a floating IP address
+  os_floating_ip:
+    state: present
+    floating_ip_address: 10.11.53.41
+    server: test-manager
+
+- name: Attach a floating IP address
+  os_floating_ip:
+    state: present
+    floating_ip_address: 10.11.53.30
+    server: test-worker-1

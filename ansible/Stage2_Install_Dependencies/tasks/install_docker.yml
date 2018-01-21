@@ -1,0 +1,26 @@
+---
+- name: Add key for docker
+  become: true
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+
+- name: Add deb repo
+  become: true
+  file: state=touch path=/etc/apt/sources.list.d/docker.list
+
+- lineinfile: dest="/etc/apt/sources.list.d/docker.list" line="{{item}}"
+  become: true
+  with_items:
+    - "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable"
+
+- name: apt update
+  become: true
+  apt: update_cache=yes cache_valid_time=3600
+
+- name: Install docker
+  become: true
+  apt: name=docker-ce state=present
+
+- name: Add user mod
+  become: true
+  command: usermod -aG docker ubuntu

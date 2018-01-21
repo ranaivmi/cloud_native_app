@@ -1,0 +1,9 @@
+---
+- name: 
+  hosts: test-manager   
+  remote_user: ubuntu # define user account for ssh login
+  serial: 1          # define the action will be done one by one
+  gather_facts: no
+  tasks:
+  - name: Launching tests
+    shell: cd ~/cloud_native_app/tests && py.test

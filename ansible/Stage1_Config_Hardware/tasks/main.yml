@@ -1,0 +1,18 @@
+---
+- name: VM Configuration Playbook
+  hosts: localhost
+  gather_facts: no
+  environment:
+    OS_AUTH_URL: "http://10.11.50.7:5000/v3"
+    OS_REGION_NAME: regionOne
+    OS_PROJECT_NAME: Lab5
+    OS_USER_DOMAIN_NAME: Default
+    OS_IDENTITY_API_VERSION: 3
+    OS_INTERFACE: public
+    OS_PASSWORD: RanHack2017
+    OS_USERNAME: Lab5
+    OS_PROJECT_ID: 047be794366c4ddd89efeb2fc77741b5
+  tasks:
+    - include_tasks: createTestServer.yml
+    - include_tasks: attach_floatingIP.yml
+    - include_tasks: wait_for_ssh.yml

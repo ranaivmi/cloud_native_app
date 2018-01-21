@@ -1,0 +1,7 @@
+---
+- name: Copy Source to Test Server
+  become: true
+  synchronize:
+    delete: yes
+    src: /var/lib/jenkins/workspace/cloud_native_app
+    dest: /home/ubuntu/

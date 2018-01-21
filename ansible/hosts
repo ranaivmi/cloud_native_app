@@ -1,0 +1,12 @@
+[openstack-teachers-server]
+10.11.50.7
+
+[test-servers]
+10.11.53.41
+10.11.53.30
+
+[test-manager]
+10.11.53.41
+
+[test-worker-1]
+10.11.53.30

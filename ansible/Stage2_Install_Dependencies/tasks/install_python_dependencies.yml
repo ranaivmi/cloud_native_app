@@ -1,0 +1,8 @@
+---
+- name: Install pip
+  become: true
+  apt: name=python-pip state=present
+
+- name: Install pytest
+  become: true
+  pip: requirements=/home/ubuntu/Deploy-CNA/test-requirements.txt
