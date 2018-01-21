@@ -19,7 +19,7 @@ stages {
 	 sh 'ssh -oStrictHostKeyChecking=no ubuntu@10.11.53.30 \'sudo apt update && sudo apt install -y python\''
 	 sh 'ANSIBLE_HOST_KEY_CHECKING=false ansible-playbook -i ansible/hosts ansible/Stage3_Install_Dependencies/tasks/main.yml'
          }
-
+     }
      	stage("Fourth Stage : Launching the application"){ 
        steps{
 	 sh 'ANSIBLE_HOST_KEY_CHECKING=false ansible-playbook -i ansible/hosts ansible/Stage4_Launching_App/tasks/main.yml'
