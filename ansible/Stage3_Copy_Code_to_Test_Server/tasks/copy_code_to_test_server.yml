@@ -3,5 +3,5 @@
   become: true
   synchronize:
     delete: yes
-    src: /var/lib/jenkins/workspace/cloud_native_app
+    src: /var/lib/jenkins/workspace/Deploy-CNA
     dest: /home/ubuntu/
