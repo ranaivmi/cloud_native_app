@@ -61,4 +61,5 @@
     shell: bash /home/ubuntu/Deploy-CNA/scripts/pull_images.sh
 
   - name: Launching the application
+    become: true
     shell: bash /home/ubuntu/Deploy-CNA/docker_services.sh
