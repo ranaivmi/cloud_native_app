@@ -44,7 +44,7 @@
     when: "docker_info.stdout.find('Swarm: active') != -1"
 
   - name: test-worker-1 join the cluster as a worker
-    shell: docker swarm join --token SWMTKN-1-1xgq59wtxw6zhym8q8g93lwdjlkp3zbzvd10db7ubilhuza53p-7t1gmap3lgml536wpbj9idglj 10.11.53.41:2377
+    shell: docker swarm join --token SWMTKN-1-28340xj7c4nrh29err1lfwhnvgeh48j3wrl6oihybogyinirqx-5b1leyp98iugsjahdubdajm1i 10.11.53.41:2377
     changed_when: False
 
 - name:
