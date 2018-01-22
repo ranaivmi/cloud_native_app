@@ -55,11 +55,10 @@
   tasks:
   - name:
     become: true
-    shell: /home/ubuntu/Deploy-CNA/scripts/client.sh 5000
+    shell: bash /home/ubuntu/Deploy-CNA/scripts/client.sh 5000
 
   - name: Pulling the docker images
-    become: true
-    shell: /home/ubuntu/Deploy-CNA/scripts/pull_images
+    shell: bash /home/ubuntu/Deploy-CNA/scripts/pull_images.sh
 
   - name: Launching the application
-    shell: /home/ubuntu/Deploy-CNA/docker_services.sh
+    shell: bash /home/ubuntu/Deploy-CNA/docker_services.sh
