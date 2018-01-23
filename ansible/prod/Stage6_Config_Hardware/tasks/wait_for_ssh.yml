@@ -1,0 +1,16 @@
+---
+- name: Wait for server to restart
+  local_action:
+    module: wait_for
+      host=10.11.54.98
+      port=22
+      delay=1
+      timeout=300
+
+- name: Wait for server to restart
+  local_action:
+    module: wait_for
+      host=10.11.54.93
+      port=22
+      delay=1
+      timeout=300

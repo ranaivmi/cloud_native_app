@@ -1,0 +1,22 @@
+- name: Create manager instance
+  os_server:
+    state: present
+    name: prod-manager
+    image: 8c946cdb-458e-440e-b5e1-6705a3679a6f
+    flavor: 3
+    key_name: hpeseance1
+    security_groups:
+      - default
+      - prod-manager
+    auto_ip: no
+    network: c13fedf2-0779-46f8-9693-a6c5d9557fa4
+    
+- name: Create server instance
+  os_server:
+    state: present
+    name: prod-worker-1
+    image: 8c946cdb-458e-440e-b5e1-6705a3679a6f
+    flavor: 3
+    key_name: hpeseance1
+    auto_ip: no
+    network: c13fedf2-0779-46f8-9693-a6c5d9557fa4

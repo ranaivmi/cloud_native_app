@@ -1,0 +1,7 @@
+---
+- hosts: prod-servers
+  remote_user: ubuntu # define user account for ssh login
+  serial: 1           # define the action will be done one by one
+  gather_facts: no
+  tasks:
+  - include_tasks: copy_code_to_test_server.yml

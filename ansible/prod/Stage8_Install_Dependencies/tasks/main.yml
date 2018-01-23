@@ -1,0 +1,10 @@
+---
+- name: 
+  hosts: prod-servers
+  remote_user: ubuntu # define user account for ssh login
+  serial: 1          # define the action will be done one by one
+  gather_facts: no
+  tasks:
+  - include_tasks: install_docker.yml     
+  - include_tasks: install_docker_compose.yml
+  - include_tasks: install_python_dependencies.yml

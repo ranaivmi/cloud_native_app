@@ -1,0 +1,65 @@
+---
+- name:
+  hosts: test-manager
+  remote_user: ubuntu # define user account for ssh login
+  serial: 1          # define the action will be done one by one
+  gather_facts: yes
+  tasks:
+  - name: Check if "Swarm Mode" is enabled
+    shell: docker info
+    changed_when: False
+    register: docker_info
+    tags:
+    - skip_ansible_lint # Suppressing the linter
+
+  - name: Init "Swarm Mode" on the manager
+    shell: docker swarm init
+    changed_when: False
+    when: "docker_info.stdout.find('Swarm: active') == -1"
+
+  - name: Get the worker join-token
+    shell: docker swarm join-token -q worker
+    changed_when: False
+    register: docker_worker_token
+    tags:
+    - skip_ansible_lint # Suppressing the linter
+    
+
+- name:
+  hosts: test-worker-1
+  remote_user: ubuntu # define user account for ssh login
+  serial: 1          # define the action will be done one by one
+  gather_facts: yes
+  tasks:
+  - name: Check if "Swarm Mode" is enabled on the worker
+    shell: docker info
+    changed_when: False
+    register: docker_info
+    tags:
+    - skip_ansible_lint # Suppressing the linter
+
+  - name: Leaving the cluster
+    shell: docker swarm leave
+    changed_when: False
+    when: "docker_info.stdout.find('Swarm: active') != -1"
+
+#  - name: test-worker-1 join the cluster as a worker
+#    shell: docker swarm join --token SWMTKN-1-28340xj7c4nrh29err1lfwhnvgeh48j3wrl6oihybogyinirqx-5b1leyp98iugsjahdubdajm1i 10.11.53.41:2377
+#    changed_when: False
+
+# - name:
+#   hosts: test-manager
+#   remote_user: ubuntu # define user account for ssh login
+#   serial: 1          # define the action will be done one by one
+#   gather_facts: yes
+#   tasks:
+#   - name:
+#     become: true
+#     shell: bash /home/ubuntu/Deploy-CNA/scripts/client.sh 5000
+
+#   - name: Pulling the docker images
+#     shell: bash /home/ubuntu/Deploy-CNA/scripts/pull_images.sh
+
+#   - name: Launching the application
+#     become: true
+#     shell: bash /home/ubuntu/Deploy-CNA/docker_services.sh
