@@ -1,6 +1,3 @@
-[openstack-teachers-server]
-10.11.50.7
-
 [test-servers]
 10.11.53.41
 10.11.53.30
@@ -10,3 +7,14 @@
 
 [test-worker-1]
 10.11.53.30
+
+[prod-servers]
+10.11.54.98
+10.11.54.93
+
+[prod-manager]
+10.11.54.93
+
+[prod-worker-1]
+10.11.54.98
+
