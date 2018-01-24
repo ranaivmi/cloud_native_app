@@ -71,4 +71,4 @@
     username: 'Deploy-App'
     color: good
     icon_url: 'https://www.ctl.io/knowledge-base/images/jenkins-stack-logo.png'
-  delegate_to: localhost
+
