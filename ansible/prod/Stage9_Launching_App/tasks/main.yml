@@ -63,3 +63,12 @@
 #   - name: Launching the application
 #     become: true
 #     shell: bash /home/ubuntu/Deploy-CNA/docker_services.sh
+
+- name: Send notification message via Slack
+  slack:
+    token: T8DEDP22W/B8VCE6PNJ/fZS67hRnmBzaBTAVNvLYrDTO
+    msg: 'Deployment of the App on the production environment'
+    username: 'Deploy-App'
+    color: good
+    icon_url: 'https://www.ctl.io/knowledge-base/images/jenkins-stack-logo.png'
+  delegate_to: localhost

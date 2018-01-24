@@ -1,7 +1,7 @@
 - name: Send notification message via Slack
   slack:
     token: T8DEDP22W/B8VCE6PNJ/fZS67hRnmBzaBTAVNvLYrDTO
-    msg: 'New deployment of the App'
+    msg: 'Launching the deployment pipeline of the App'
     username: 'Deploy-App'
     color: warning
     icon_url: 'https://www.ctl.io/knowledge-base/images/jenkins-stack-logo.png'
