@@ -66,7 +66,7 @@
     shell: cd /home/ubuntu/Deploy-CNA && docker-compose build
 
   - name: Tagging the docker images
-    shell: /home/ubuntu/Deploy-CNA/scripts/tag_images.sh
+    shell: bash /home/ubuntu/Deploy-CNA/scripts/tag_images.sh
 
   - name: Launching the application
-    shell: cd /home/ubuntu/Deploy-CNA && sudo ./docker_services.sh
+    shell: cd /home/ubuntu/Deploy-CNA && sudo bash ./docker_services.sh
