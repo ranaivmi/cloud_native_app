@@ -47,7 +47,8 @@ def api_play(id):
         lines = r.fetch_row()
         config.logger.debug("User data: %s", lines)
         data.update({"id": id,
-                     "firstname": lines[0][1].decode('utf-8'),
+#                     "firstname": lines[0][1].decode('utf-8'),
+                     "firstname": "Rana".decode('utf-8'),
                      "lastname": lines[0][2].decode('utf-8'),
                      "email": lines[0][3].decode('utf-8')})
     else:
