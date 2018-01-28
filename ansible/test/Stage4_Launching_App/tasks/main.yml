@@ -62,8 +62,11 @@
   # - name: Pulling the docker images
   #   shell: bash /home/ubuntu/Deploy-CNA/scripts/pull_images.sh
 
-  # - name: Pulling the docker images
-  #   shell: cd /home/ubuntu/Deploy-CNA && docker-compose build
+  - name: Building the docker images
+    shell: cd /home/ubuntu/Deploy-CNA && docker-compose build
+
+  - name: Tagging the docker images
+    shell: /home/ubuntu/Deploy-CNA/scripts/tag_images.sh
 
   - name: Launching the application
-    shell: sudo /home/ubuntu/Deploy-CNA/docker_services.sh
+    shell: cd /home/ubuntu/Deploy-CNA && sudo ./docker_services.sh
