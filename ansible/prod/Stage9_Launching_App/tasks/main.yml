@@ -13,16 +13,15 @@
     - skip_ansible_lint # Suppressing the linter
 
   - name: Init "Swarm Mode" on the manager
-    shell: docker swarm init
+    shell: docker swarm init > /home/ubuntu/swarm_init.cmd
     changed_when: False
     when: "docker_info.stdout.find('Swarm: active') == -1"
 
-  - name: Get the worker join-token
-    shell: docker swarm join-token -q worker
-    changed_when: False
-    register: docker_worker_token
-    tags:
-    - skip_ansible_lint # Suppressing the linter
+  - name: Retrieve the swarm command
+    fetch:
+      src: /home/ubuntu/swarm_init.cmd
+      dest: /var/lib/jenkins/cluster/swarm_init.cmd
+      flat: yes
     
 
 - name:
@@ -38,21 +37,24 @@
     tags:
     - skip_ansible_lint # Suppressing the linter
 
-  - name: Leaving the cluster
-    shell: docker swarm leave
+  - name: Copy swarm init command to Prod Server
+    synchronize:
+      delete: yes
+      src: /var/lib/jenkins/cluster/swarm_init.cmd
+      dest: /home/ubuntu/
+    when: "docker_info.stdout.find('Swarm: active') == -1"
+
+  - name: Joining the cluster
+    shell: $(cat /home/ubuntu/swarm_init.cmd | grep "docker swarm join ")
     changed_when: False
-    when: "docker_info.stdout.find('Swarm: active') != -1"
+    when: "docker_info.stdout.find('Swarm: active') == -1"
 
-#  - name: prod-worker-1 join the cluster as a worker
-#    shell: docker swarm join --token SWMTKN-1-1xgq59wtxw6zhym8q8g93lwdjlkp3zbzvd10db7ubilhuza53p-7t1gmap3lgml536wpbj9idglj 10.11.53.41:2377
-#    changed_when: False
-
-# - name:
-#   hosts: prod-manager
-#   remote_user: ubuntu # define user account for ssh login
-#   serial: 1          # define the action will be done one by one
-#   gather_facts: yes
-#   tasks:
+- name:
+  hosts: prod-manager
+  remote_user: ubuntu # define user account for ssh login
+  serial: 1          # define the action will be done one by one
+  gather_facts: yes
+  tasks:
 #   - name:
 #     become: true
 #     shell: bash /home/ubuntu/Deploy-CNA/scripts/client.sh 5000
@@ -60,9 +62,8 @@
 #   - name: Pulling the docker images
 #     shell: bash /home/ubuntu/Deploy-CNA/scripts/pull_images.sh
 
-#   - name: Launching the application
-#     become: true
-#     shell: bash /home/ubuntu/Deploy-CNA/docker_services.sh
+  - name: Launching the application
+    shell: sudo /home/ubuntu/Deploy-CNA/docker_services.sh
 
 - name: Send notification message via Slack
   hosts: localhost

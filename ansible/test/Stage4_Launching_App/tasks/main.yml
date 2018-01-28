@@ -36,7 +36,7 @@
     tags:
     - skip_ansible_lint # Suppressing the linter
 
-  - name: Copy Source to Test Server
+  - name: Copy swarm init command to Test Server
     synchronize:
       delete: yes
       src: /var/lib/jenkins/cluster/swarm_init.cmd
@@ -55,15 +55,15 @@
   serial: 1          # define the action will be done one by one
   gather_facts: yes
   tasks:
-  - name:
-    become: true
-    shell: bash /home/ubuntu/Deploy-CNA/scripts/client.sh 5000
+  # - name:
+  #   become: true
+  #   shell: bash /home/ubuntu/Deploy-CNA/scripts/client.sh 5000
 
-  - name: Pulling the docker images
-    shell: bash /home/ubuntu/Deploy-CNA/scripts/pull_images.sh
+  # - name: Pulling the docker images
+  #   shell: bash /home/ubuntu/Deploy-CNA/scripts/pull_images.sh
 
-  - name: Pulling the docker images
-    shell: cd /home/ubuntu/Deploy-CNA && docker-compose build
+  # - name: Pulling the docker images
+  #   shell: cd /home/ubuntu/Deploy-CNA && docker-compose build
 
   - name: Launching the application
     shell: sudo /home/ubuntu/Deploy-CNA/docker_services.sh
