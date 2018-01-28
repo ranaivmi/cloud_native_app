@@ -13,6 +13,8 @@
     name: test-manager
     image: 4c8f1190-d2ca-4a13-8de7-ad49cf16fd77
     flavor: b046fd71-e841-43df-ad97-c572bf3c30d3
+    volumes:
+      - test-manager
     key_name: hpeseance1
     security_groups:
       - default
@@ -25,5 +27,7 @@
     name: test-worker-1
     image: 4c8f1190-d2ca-4a13-8de7-ad49cf16fd77
     flavor: b046fd71-e841-43df-ad97-c572bf3c30d3
+    volumes:
+      - test-worker-1
     key_name: hpeseance1
     auto_ip: no
