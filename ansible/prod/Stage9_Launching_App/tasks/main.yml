@@ -64,8 +64,11 @@
   - name: Building the docker images
     shell: cd /home/ubuntu/Deploy-CNA && docker-compose build
 
-  - name: Tagging the docker images
-    shell: bash /home/ubuntu/Deploy-CNA/scripts/tag_images.sh
+  # - name: Tagging the docker images
+  #   shell: bash /home/ubuntu/Deploy-CNA/scripts/tag_images.sh
+
+  - name: Deleting the docker services
+    shell: cd /home/ubuntu/Deploy-CNA/ && sudo bash ./docker_services_rm.sh
 
   - name: Launching the application
     shell: cd /home/ubuntu/Deploy-CNA/ && sudo bash ./docker_services.sh
