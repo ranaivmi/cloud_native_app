@@ -37,7 +37,7 @@ def api_play(id):
     if value:
         data = {"id": id, "status": value.decode("utf-8")}
     else:
-        data = {"id": id, "status": "not_played rana"}
+        data = {"id": id, "status": "not_played"}
 
     resp = jsonify(data)
     resp.status_code = 200
