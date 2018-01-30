@@ -5,5 +5,8 @@
   serial: 1          # define the action will be done one by one
   gather_facts: yes
   tasks:
+  - name: Waiting for availability of services
+    shell: sleep 60
+    
   - name: Launching tests
     shell: cd ~/Deploy-CNA/tests && py.test
